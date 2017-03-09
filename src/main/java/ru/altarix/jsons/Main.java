@@ -25,18 +25,19 @@ public class Main {
 	 * @return 
 	 */
 	public static String validate(String schemaPath, String responceFilePathOrString, String restype) throws IOException, ProcessingException {
-        restype = restype.toLowerCase();
-        JsonNode schemafile = JsonLoader.fromPath(schemaPath);
+		restype = restype.toLowerCase();
+		JsonNode schemaFile = JsonLoader.fromPath(schemaPath);
 		JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
-		JsonSchema schema = factory.getJsonSchema(schemafile);		
-        JsonNode response;         
+		JsonSchema schema = factory.getJsonSchema(schemaFile);
+		JsonNode response;         
 
         if (restype.equals("file")) {
             response = JsonLoader.fromPath(responceFilePathOrString);
         } else {
             if (restype.equals("string")) {
                 response = JsonLoader.fromString(responceFilePathOrString);
-            } else {				
+            } else {
+				
                 return "ERROR: Validation failure. MESSAGE: Unknown type of the responce source. It should be 'file' or 'string'.";
             }
         }
@@ -46,3 +47,5 @@ public class Main {
         return report.toString();
 		
     }
+
+}
