@@ -8,34 +8,41 @@ import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import java.io.IOException;
 
-/*
-* Comments should here and below
-*/
+
+/**
+ * Created by Denis Krasilnikov (kde-intro)
+ */
 
 public class Main {
     
-    public static String validate(String schemaPath, String responceFilePathOrString, String restype) throws IOException, ProcessingException {
+	/**
+	 * validate
+	 * 
+	 * @param schemaPath
+	 * @param responceFilePathOrString
+	 * @param restype
+	 *
+	 * @return 
+	 */
+	public static String validate(String schemaPath, String responceFilePathOrString, String restype) throws IOException, ProcessingException {
         restype = restype.toLowerCase();
-        final JsonNode schemafile = JsonLoader.fromPath(schemaPath);
-        JsonNode responce;
+        JsonNode schemafile = JsonLoader.fromPath(schemaPath);
+		JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
+		JsonSchema schema = factory.getJsonSchema(schemafile);		
+        JsonNode response;         
 
         if (restype.equals("file")) {
-            responce = JsonLoader.fromPath(responceFilePathOrString);
+            response = JsonLoader.fromPath(responceFilePathOrString);
         } else {
             if (restype.equals("string")) {
-                responce = JsonLoader.fromString(responceFilePathOrString);
-            } else {
-                return "ERROR: Validation failure. MESSAGE: Unknown type of responce resource. It should be 'file' or 'string'.";
+                response = JsonLoader.fromString(responceFilePathOrString);
+            } else {				
+                return "ERROR: Validation failure. MESSAGE: Unknown type of the responce source. It should be 'file' or 'string'.";
             }
         }
-
-        final JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
-        final JsonSchema schema = factory.getJsonSchema(schemafile);
-
-        ProcessingReport report;
-
-        report = schema.validate(responce);
+               
+        ProcessingReport report = schema.validate(response);
+		
         return report.toString();
+		
     }
-
-}
