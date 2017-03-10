@@ -1,4 +1,4 @@
-package ru.altarix.jsons;
+package ru.kde.intro.jsonsv;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jackson.JsonLoader;
@@ -14,22 +14,13 @@ import java.io.IOException;
  */
 
 public class Main {
-    
-	/**
-	 * validate
-	 * 
-	 * @param schemaPath
-	 * @param responceFilePathOrString
-	 * @param restype
-	 *
-	 * @return 
-	 */
-	public static String validate(String schemaPath, String responceFilePathOrString, String restype) throws IOException, ProcessingException {
-		restype = restype.toLowerCase();
-		JsonNode schemaFile = JsonLoader.fromPath(schemaPath);
-		JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
-		JsonSchema schema = factory.getJsonSchema(schemaFile);
-		JsonNode response;         
+
+    public static String validate(String schemaPath, String responceFilePathOrString, String restype) throws IOException, ProcessingException {
+        restype = restype.toLowerCase();
+        JsonNode schemaFile = JsonLoader.fromPath(schemaPath);
+        JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
+        JsonSchema schema = factory.getJsonSchema(schemaFile);
+        JsonNode response;
 
         if (restype.equals("file")) {
             response = JsonLoader.fromPath(responceFilePathOrString);
@@ -37,15 +28,15 @@ public class Main {
             if (restype.equals("string")) {
                 response = JsonLoader.fromString(responceFilePathOrString);
             } else {
-				
+
                 return "ERROR: Validation failure. MESSAGE: Unknown type of the responce source. It should be 'file' or 'string'.";
             }
         }
-               
+
         ProcessingReport report = schema.validate(response);
-		
+
         return report.toString();
-		
+
     }
 
 }
