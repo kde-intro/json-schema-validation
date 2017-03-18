@@ -9,10 +9,6 @@ import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import java.io.IOException;
 
 
-/**
- * Created by Denis Krasilnikov (kde-intro)
- */
-
 public class Main {
 
     public static String validate(String schemaPath, String responceFilePathOrString, String restype) throws IOException, ProcessingException {
