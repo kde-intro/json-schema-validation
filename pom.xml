@@ -3,13 +3,16 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+        
     <groupId>ru.kde.intro</groupId>
     <artifactId>jsonsv</artifactId>
     <version>1.1</version>
+        
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.slf4j-version>1.5.10</org.slf4j-version>
     </properties>
+        
     <dependencies>
         <dependency>
             <groupId>com.github.fge</groupId>
@@ -17,6 +20,7 @@
             <version>2.2.6</version>
         </dependency>
     </dependencies>
+        
     <build>
         <plugins>
             <plugin>
@@ -27,6 +31,7 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+                
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.3</version>
@@ -52,6 +57,7 @@
                     </execution>
                 </executions>
             </plugin>
+                
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -66,6 +72,7 @@
                     </archive>
                 </configuration>
             </plugin>
+                
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
